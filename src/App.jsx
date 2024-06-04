@@ -1,6 +1,12 @@
 import React from 'react'
 import "./App.css";
 import TaskForm from './components/TaskForm';
+import TaskColumn from './components/TaskColumn';
+
+import todoIcon from "./assets/direct-hit.png";
+import doingIcon from "./assets/glowing-star.png";
+import doneIcon from "./assets/check-mark-button.png";
+
 
 const App = () => {
   return (
@@ -9,9 +15,16 @@ const App = () => {
       {/* we cna use both open and close tags or self clossing tag */}
       <TaskForm />
       <main className='app_main'>
-        <section className='task_col'>Section 1</section>
-        <section className='task_col'>Section 2</section>
-        <section className='task_col'>Section 3</section>
+        {/* <section className='task_col'>Section 1</section> */}
+
+        <TaskColumn taskTitle="To Do" taskIcon={todoIcon}/>
+
+        <TaskColumn taskTitle="Doing" taskIcon={doingIcon}/>
+
+        <TaskColumn taskTitle="Done" taskIcon={doneIcon}/>
+
+        {/* <section className='task_col'>Section 2</section>
+        <section className='task_col'>Section 3</section> */}
       </main>
     </div>
   )
