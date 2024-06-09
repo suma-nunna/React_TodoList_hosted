@@ -33,6 +33,24 @@ const Basics = () => {
     setInput(event.target.value);
   };
 
+  // ************************************
+  // example logic for implementing obj updation in function with creating a new obj using deep copy , execute belo code for reference
+  let data = {
+    task: "",
+    time: 27,
+  };
+  function setName(obj) {
+    // Log the current name, value from obj, and the spread data object
+    console.log(obj.name, obj.value, { ...data });
+    // Return a new object that combines all properties of data
+    // and sets/overwrites the task property with obj.value
+    return { ...data, task: obj.value };
+  }
+  // Execute the function and log the result
+  console.log(setName({ name: "task", value: "welcome" }), data);
+  // output: {task: 'welcome', time: 27} {task: '', time: 27}
+  // ************************************
+
   return (
     // <React.Fragment>
     <>
@@ -66,18 +84,20 @@ const Basics = () => {
       <ul>
         {
           // key is to identify html elements , it is unique value
-          tasks.map((task) => (<li key={task}>{task}</li>))
+          tasks.map((task) => (
+            <li key={task}>{task}</li>
+          ))
         }
       </ul>
 
       <ol>
         {
           // key is to identify html elements , it is unique value
-          tasks.map((task) => (<li key={task}>{task}</li>))
+          tasks.map((task) => (
+            <li key={task}>{task}</li>
+          ))
         }
       </ol>
-
-      
     </>
     // </React.Fragment>
   );

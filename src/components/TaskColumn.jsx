@@ -3,10 +3,10 @@ import React from "react";
 import "./TaskColumn.css";
 import TaskCard from "./TaskCard";
 
-const TaskColumn = (props) => {
+const TaskColumn = ({ taskTitle, taskIcon, tasks, status }) => {
   //   console.log(props);
-  let { taskTitle, taskIcon } = props;
-  console.log(taskTitle);
+  // let { taskTitle, taskIcon, tasks, status } = props;
+  // console.log(taskTitle);
   // we can use above variablöes or can use directly props in HTML like {props.taskTitle} {props.taskIcon}
 
   return (
@@ -15,7 +15,14 @@ const TaskColumn = (props) => {
         <img src={taskIcon} alt="" className="task_col_Icon" />
         {taskTitle}
       </h3>
-      <TaskCard />
+
+      {tasks.map(
+        (task, index) =>
+          task.status === status && (
+            <TaskCard key={index} title={task.task} tags={task.tags} />
+          )
+      )}
+      {/* <TaskCard /> */}
     </section>
   );
 };

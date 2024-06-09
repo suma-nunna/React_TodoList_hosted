@@ -1,70 +1,39 @@
-import React from 'react'
+import React, { useState } from "react";
 import "./App.css";
-import TaskForm from './components/TaskForm';
-import TaskColumn from './components/TaskColumn';
+import TaskForm from "./components/TaskForm";
+import TaskColumn from "./components/TaskColumn";
 
 import todoIcon from "./assets/direct-hit.png";
 import doingIcon from "./assets/glowing-star.png";
 import doneIcon from "./assets/check-mark-button.png";
 
-
 const App = () => {
+  const [tasks, setTasks] = useState([]);
+
+  console.log("T ", tasks);
+
   return (
-    <div className='app'>
+    <div className="app">
       {/* <TaskForm></TaskForm> */}
       {/* we cna use both open and close tags or self clossing tag */}
-      <TaskForm />
-      <main className='app_main'>
+      <TaskForm setTasks={setTasks} />
+      <main className="app_main">
         {/* <section className='task_col'>Section 1</section> */}
 
-        <TaskColumn taskTitle="To Do" taskIcon={todoIcon}/>
+        <TaskColumn taskTitle="To Do" taskIcon={todoIcon} tasks={tasks} status="todo" />
 
-        <TaskColumn taskTitle="Doing" taskIcon={doingIcon}/>
+        <TaskColumn taskTitle="Doing" taskIcon={doingIcon} tasks={tasks} status="doing" />
 
-        <TaskColumn taskTitle="Done" taskIcon={doneIcon}/>
+        <TaskColumn taskTitle="Done" taskIcon={doneIcon} tasks={tasks} status="done" />
 
         {/* <section className='task_col'>Section 2</section>
         <section className='task_col'>Section 3</section> */}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default App;
 
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
