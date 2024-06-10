@@ -17,7 +17,7 @@ const TaskForm = ({ setTasks }) => {
 
   const [taskData, settaskData] = useState({
     task: "",
-    status: "todo ",
+    status: "todo",
     tags: [],
   });
 
@@ -47,6 +47,7 @@ const TaskForm = ({ setTasks }) => {
     // const name = e.target.name;
     // const value = e.target.value;
 
+    // updating the object
     settaskData((prev) => {
       return { ...prev, [name]: value };
     });
@@ -59,6 +60,12 @@ const TaskForm = ({ setTasks }) => {
     setTasks((prev) => {
       return [...prev, taskData];
     });
+
+    settaskData({
+      task: "",
+      status: "todo",
+      tags: [],
+    })
   };
 
   // console.log(taskData);
@@ -70,6 +77,8 @@ const TaskForm = ({ setTasks }) => {
           type="text"
           name="task"
           // name attribute will bind with state object while we are using common onchange method for forms
+          value={taskData.task} 
+          // value attribute - bind the value from logic to html and html to logic , here we are using it for reset the form after submit
           className="task_title"
           placeholder="Enter your task...."
           onChange={handleFomChanges}
@@ -87,8 +96,10 @@ const TaskForm = ({ setTasks }) => {
             {/* for tagName attribute we can pass anytype of data like array , object or functions */}
             <Tag
               tagName="HTML"
-              selectTag={selectTag}
-              selected={checkTag("HTML")}
+              selectTag={selectTag} // sending selectTag function reference not calling it 
+              selected={checkTag("HTML")} // calling the function checkTag , in checkTag we are retturing true or false , sending the boolen value to tag component to set the style
+
+              // onClick={() => selectTag("HTML")} // onclick also acts like a prop not eventhandler for react component
             />
 
             {/* Remove below button , instead we are using Tag component same as above code (common component for button ) */}
@@ -114,6 +125,8 @@ const TaskForm = ({ setTasks }) => {
             <select
               name="status"
               // name attribute will bind with state object while we are using common onchange method for forms
+              value={taskData.status} 
+              // bind the value from logic to html and html to logic , here we are using it for reset the form after submit
               id=""
               className="task_status"
               onChange={handleFomChanges}

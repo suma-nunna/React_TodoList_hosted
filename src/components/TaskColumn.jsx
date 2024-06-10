@@ -3,11 +3,11 @@ import React from "react";
 import "./TaskColumn.css";
 import TaskCard from "./TaskCard";
 
-const TaskColumn = ({ taskTitle, taskIcon, tasks, status }) => {
+const TaskColumn = ({ taskTitle, taskIcon, tasks, status, handleDeleteTask }) => {
   //   console.log(props);
   // let { taskTitle, taskIcon, tasks, status } = props;
   // console.log(taskTitle);
-  // we can use above variablöes or can use directly props in HTML like {props.taskTitle} {props.taskIcon}
+  // we can use above variables or can use directly props in HTML like {props.taskTitle} {props.taskIcon}
 
   return (
     <section className="task_col">
@@ -19,7 +19,8 @@ const TaskColumn = ({ taskTitle, taskIcon, tasks, status }) => {
       {tasks.map(
         (task, index) =>
           task.status === status && (
-            <TaskCard key={index} title={task.task} tags={task.tags} />
+            <TaskCard key={index} title={task.task} tags={task.tags} handleDeleteTask={handleDeleteTask} index={index} />
+            // key is not a prop, it is react attribute to give unique id to common HTML elements
           )
       )}
       {/* <TaskCard /> */}

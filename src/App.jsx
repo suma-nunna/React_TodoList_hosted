@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import TaskForm from "./components/TaskForm";
 import TaskColumn from "./components/TaskColumn";
@@ -7,10 +7,26 @@ import todoIcon from "./assets/direct-hit.png";
 import doingIcon from "./assets/glowing-star.png";
 import doneIcon from "./assets/check-mark-button.png";
 
+// const savedTasks = localStorage.getItem("taskList");
+
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const savedTasks = localStorage.getItem("taskList");
+
+  const [tasks, setTasks] = useState(JSON.parse(savedTasks) || []);
+  // if savedTasks returns null then it will assign with []
 
   console.log("T ", tasks);
+
+  // regarding useEffect ref or def check the notes
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(tasks));
+  }, [tasks]);
+  // localstorage only access to the string format
+
+  const handleDeleteTask = (taskIndex) => {
+    const filteredTasks = tasks.filter((ele, index) => index !== taskIndex);
+    setTasks(filteredTasks);
+  };
 
   return (
     <div className="app">
@@ -20,11 +36,29 @@ const App = () => {
       <main className="app_main">
         {/* <section className='task_col'>Section 1</section> */}
 
-        <TaskColumn taskTitle="To Do" taskIcon={todoIcon} tasks={tasks} status="todo" />
+        <TaskColumn
+          taskTitle="To Do"
+          taskIcon={todoIcon}
+          tasks={tasks}
+          status="todo"
+          handleDeleteTask={handleDeleteTask}
+        />
 
-        <TaskColumn taskTitle="Doing" taskIcon={doingIcon} tasks={tasks} status="doing" />
+        <TaskColumn
+          taskTitle="Doing"
+          taskIcon={doingIcon}
+          tasks={tasks}
+          status="doing"
+          handleDeleteTask={handleDeleteTask}
+        />
 
-        <TaskColumn taskTitle="Done" taskIcon={doneIcon} tasks={tasks} status="done" />
+        <TaskColumn
+          taskTitle="Done"
+          taskIcon={doneIcon}
+          tasks={tasks}
+          status="done"
+          handleDeleteTask={handleDeleteTask}
+        />
 
         {/* <section className='task_col'>Section 2</section>
         <section className='task_col'>Section 3</section> */}
